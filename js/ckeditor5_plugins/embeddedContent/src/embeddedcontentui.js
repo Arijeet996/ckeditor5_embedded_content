@@ -58,12 +58,13 @@ export default class EmbeddedContentUI extends Plugin {
         if (modelElement && typeof modelElement.name !== 'undefined' && modelElement.name === 'embeddedContent') {
           dialogSettings.plugin_id = modelElement.getAttribute('embeddedContentPluginId');
           dialogSettings.plugin_config = modelElement.getAttribute('embeddedContentPluginConfig');
-        }
-        else {
+        } else {
           delete dialogSettings.plugin_id;
           delete dialogSettings.plugin_config;
         }
+
         url.searchParams.append('editor_id', editor.id);
+        
         openDialog(
             url.toString(),
             ({attributes}) => {
@@ -85,10 +86,12 @@ export default class EmbeddedContentUI extends Plugin {
       const modelElement = editor.editing.mapper.toModelElement( data.target);
       if(modelElement && typeof modelElement.name !== 'undefined' && modelElement.name === 'embeddedContent'){
         const query = {
-          plugin_id: modelElement.getAttribute('embeddedContentPluginId'),
-          plugin_config: modelElement.getAttribute('embeddedContentPluginConfig'),
           editor_id: editor.id,
         };
+        
+        dialogSettings.plugin_id = modelElement.getAttribute('embeddedContentPluginId');
+        dialogSettings.plugin_config = modelElement.getAttribute('embeddedContentPluginConfig');
+        
         openDialog(
           `${dialogURL}?${new URLSearchParams(query)}`,
           ({ attributes }) => {

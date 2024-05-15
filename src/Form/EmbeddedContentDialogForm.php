@@ -124,7 +124,7 @@ class EmbeddedContentDialogForm extends FormBase {
       ],
       'update' => [
         '#name' => $update_button,
-        '#type' => 'submit',
+        '#type' => 'select',
         '#value' => $this->t('Update'),
         '#attributes' => [
           'class' => ['js-hide'],
